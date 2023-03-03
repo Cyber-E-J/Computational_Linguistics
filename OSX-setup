@@ -1,0 +1,96 @@
+These are OSX setup instructions for Computational Linguistics 1.  They assume `port`, the Macports open source software environment. See [https://www.macports.org](https://www.macports.org) on installing that.
+
+
+## Install virtualenv
+```
+sudo port install py310-virtualenv
+```
+Also install tkinter, which is used by NLTK graphics.
+```
+sudo port install py310-tkinter
+```
+Also install jupyterlab.  This might not be necessary, since jupyter lab is installed later in the virtual environment.
+```
+sudo port install py310-jupyterlab
+```
+
+
+## Create a virtual environment
+
+I keep my virtual environments in `/local/sys/python`.  The following creates an environment `v10` that uses `python10`.
+You can use any location.
+
+```
+cd `/local/sys/python`
+virtualenv --python /opt/local/bin/python3.10 v10
+```
+
+Activate the environment and check that it is using the right python. 
+
+```
+python> source v10/bin/activate
+(v10) python> python --version
+Python 3.10.8
+(v10) python> pip3 --version
+pip 22.3.1 from /System/Volumes/Data/local/sys/python/v10/lib/python3.10/site-packages/pip (python 3.10)
+(v10) python>
+```
+
+The prompt starting with `(v10)` indicates we are in the environment.
+
+## Install and test nltk
+
+In the `v10` environment, install nltk with pip.
+
+```
+(v10) python> pip3 install nltk
+```
+
+Also install `jupyterlab` and `svgling`.
+```
+pip3 install jupyterlab
+pip3 install svgling
+```
+
+Go to a directory with a notebook, and start it.
+
+```
+cd /local/teach/cl23/H/H1
+jupyter lab ps1a.skeleton.ipynb
+```
+
+With luck NLTK graphics will now work.
+
+
+## Further notes
+### Root level directories
+[https://derflounder.wordpress.com/2020/01/18/creating-root-level-directories-and-symbolic-links-on-macos-catalina/](https://derflounder.wordpress.com/2020/01/18/creating-root-level-directories-and-symbolic-links-on-macos-catalina/) has instructions for creating root level writable directories like
+`/local`.  Create a file `/etc/synthetic.conf`.  Here is mine.
+
+
+```
+cat /etc/synthetic.conf
+# "System/Volumes/Data/local", a writeable location at the root of the data volume
+# Link /local to it, it's used for /local/teach etc
+local	System/Volumes/Data/local
+```
+
+Also create the directory `/System/Volumes/Data/local`.  Substitute your uid.
+```
+sudo mkdir /System/Volumes/Data/local
+sudo chown uid /System/Volumes/Data/local
+```
+
+### Designating the jupyter browser
+To make jupyter use the chrome browser, include this in `~/.jupyter/jupyter_notebook_config.py`.
+For me it resolved graphics problems.
+
+```
+# mr249 put this in to make jupyter lab open in Chrome
+# after creating the config file with
+# jupyter lab --generate-config
+c.NotebookApp.browser = 'open -a /Applications/Google\ Chrome.app %s'
+```
+
+### Markdown viewing
+The `Markdown Viewer` chrome extension can be used to display Markdown files like this one in chrome.

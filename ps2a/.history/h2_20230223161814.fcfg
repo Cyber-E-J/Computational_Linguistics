@@ -1,0 +1,80 @@
+## Natural Language Toolkit: h3b.fcfg
+##
+## Second base grammar for sentences about strings
+## It adds the verb 'follows'.
+##
+## Author: Mats Rooth
+##
+## For license information, see LICENSE.TXT
+
+% start S
+############################
+# Grammar Rules
+#############################
+S[SEM=<?subj(?vp)>] -> DP[SEM=?subj] VP[SEM=?vp]
+
+S[SEM=<?vp(?subj)>] -> NP[SEM=?subj] VP[SEM=?vp]
+
+DP[ SEM=<?X(?P)>] -> Det[SEM=?X] N[SEM=?P] 
+
+VP[SEM=?Q] -> 'is' A[SEM=?Q]
+
+VP[SEM=<(?Q&?P)>] -> 'is' A[SEM=?Q] 'and' 'is' DP[SEM=?P]
+VP[SEM=?P] -> 'is' 'a' 
+
+# This is included for testing.
+VP[SEM=<\x.offend(x)>] -> 'offends'
+
+# Transitive verb with individual object.
+VP[ SEM=<?R(?n)>] -> TV[SEM=?R] NP[SEM=?n]
+
+# Transitive verb with quantifier object.
+# The object is given minimal scope.
+VP[ SEM=<\m.?X(\n.(?R(n)(m)))>] -> TV[SEM=?R] DP[SEM=?X]
+
+#############################
+# Lexical Rules
+#############################
+
+A[SEM=<\n.exists c.(vowel(c) & char(n,c))>] -> 'vocalic'
+A[SEM=<\n.exists c.((-vowel(c)) & char(n,c))>] -> 'consonantal'
+A[SEM=<\n.exists c.(capital(n) & char(n,c))>] -> 'capitalized'
+
+A[SEM=<\n. (n = 1) >] -> 'initial'
+
+Det[SEM=<\P Q.all n.(P(n) -> Q(n))>] -> 'every'
+Det[SEM=<\P Q.exists n.(P(n) & Q(n))>] -> 'a'
+Det[SEM=<\P Q.exists n.(P(n) & Q(n))>] -> 'some'
+Det[SEM=<\P Q.all n.(P(n) -> -Q(n))>] -> 'no'
+
+N[SEM=<\n.char(n,leti)>] -> 'i'
+N[SEM=<\n.char(n,lete)>] -> 'e'
+N[SEM=<\n.char(n,letu)>] -> 'u'
+
+N[SEM=<\n.char(n,letp)>] -> 'p'
+N[SEM=<\n.char(n,lett)>] -> 't'
+N[SEM=<\n.char(n,letk)>] -> 'k'
+
+N[SEM=<\n.exists c.(glide(c) & char(n,c))>] -> 'glide'
+
+N[SEM=<\n.exists c.char(n,c)>] -> 'letter'
+N[SEM=<\n.exists c.(vowel(c) & char(n,c))>] -> 'vowel'
+N[SEM=<\n.exists c.(-vowel(c) & char(n,c))>] -> 'consonant'
+
+NP[SEM=<1>] -> 'letter' 'one'
+NP[SEM=<2>] -> 'letter' 'two'
+NP[SEM=<3>] -> 'letter' 'three'
+NP[SEM=<4>] -> 'letter' 'four'
+NP[SEM=<5>] -> 'letter' 'five'
+
+TV[SEM=<\m n.le(m,n)>] -> 'follows'
+TV[SEM=<\m n.le(n,m)>] -> 'precedes'
+
+
+
+
+
+
+
+
+

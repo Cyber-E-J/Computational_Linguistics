@@ -1,0 +1,124 @@
+Semantics of sentences about strings
+Computational Linguistics Spring 2023
+Problems Set 2
+
+The text for this module is the NLTK book
+Chapter 9. Building Feature Based Grammars and
+Chapter 10. Analyzing the Meaning of Sentences
+
+See also lecture8_2023.ipynb and string_2023.ipynb
+
+The purpose of the assingnment is to develop feature-based grammars that include
+logical semantics, and to evaluate the adequacy of the semantics by computing
+truth in logically constructed models.  For instance, we want to be able to
+evaluate whether the sentence
+
+   every consonant is capitalized
+
+is true or false as description of the word
+
+   CINEMA
+
+or
+
+   Cinema
+
+or
+
+   CINEmA.
+
+In each problem n do these steps. The problem statement gives sentence sn. See
+Chapters 9 and 10 for the methodology.
+
+(i) Define a feature based grammar gn that includes all the words in sentence sn
+its lexicon.  The feature grammars will usually add a word and/or construction
+to a base grammar which will be similar to simple-sem.fcfg.  This base grammar
+will be distributed. (It will be helpful to figure out how to add a lexical item
+or production to a grammar in Python. Discuss the method for this on the forum.
+Or you can define the grammar from scratch.)
+
+(ii) Parse the sentenced and display the tree.
+
+(iii) Map sn to a logical formula fn by parsing with gn and extracting the
+semantics that annotates the root.
+
+(iv) Define a combination four words (serving as models) and the intuitive
+truth values of sentence sn as a description of the word.
+
+(v) Transform the four words into four models or valuations in the sense of
+Chapter 10. This can be done as in Lecture 8, or by using a function.
+Code for this may be shared and discussed on the forum.
+
+(vi) Evaluate formula fn in the four models to obtain four truth values. Compare them
+to the target truth values.
+
+Problems
+=======
+
+1. letter two is consonantal 
+Base your analysis on 'letter two is vocalic', which is covered by the base grammar.
+
+2. every vowel precedes letter three
+   Add a production for 'precedes' to the grammar. Don't add it to the
+   valuations. Instead, define the semantics of 'precedes' in terms of
+   the primitive used for 'follows'.
+
+3. some vowel is capitalized
+   You need to add "capitalized" to the grammar, and to the valuations.
+
+4. no glide is capitalized
+  The glides are "y" and "w". Define "no", with the same semantic
+    type as "every" and "some". Include a constant 'glide' in the valuations.
+
+5. letter one is initial and is a consonant
+   Define "initial", meaning 'is at the start of the word' in terms
+   of the available primitives.
+
+6. letter three is final
+
+   Define "final" in a way that works for words of any length. Don't include a
+   corresponding constant in the valutions. Decide what should happen with a words of
+   length one.
+
+7. every vowel is adjacent to letter three
+
+   Include 'adjacent' in the grammar. Use the strategy with PP[to] to select the
+   preposition.  Either define the semantics of 'adjacent' in terms of the available
+   primitives, or add to the function that constructs valuations.
+
+8. every vowel that follows letter two is capitalized
+   This has a subject relative clause . Methodology for the
+   semantics of subject relative clauses is in lecture8.ipynb.
+
+9. some vowel immediately precedes letter three
+   some vowel immediately follows letter three
+
+  Define "immediately" in a way that works for both "precedes" and "follows".
+
+10. Post at least one challenge problem to PS2 challenge on the forum before
+   the target date for challenge problems.  Be creative rather than varying
+   challenge problems from others in mechanical ways. Include your challenge problem
+   here.
+
+11. Solve at least one challenge problem. When you solve it, post core
+   part of the result to ed.  Give your solution here in the format above. Don't pick
+   a problem that somebody else has solved.
+
+*12. If you made a contribution to defining the function that maps word strings
+to valuations, describe it here.
+
+Work individually, except that code for mapping a word to a valuation may be
+shared.  Post techinical questions and requests for hints on the forum.
+
+Notes
+The problems are selected so that quantifiers are used only in subject position.
+So it is not necessary (except perhaps in challenge problems) to apply the strategy
+from simple-sem.fcfg to fit quantified NPs into object positions.
+
+The words 'precedes' and 'follows' are interpreted in the sense of 'not necessarily
+immediately'.
+
+
+
+
+

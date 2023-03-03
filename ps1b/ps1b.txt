@@ -1,0 +1,132 @@
+Problem set 1b
+Computational Linguistics
+Fall 2023
+
+This problem set involves working concretely with grammars, parsing, and the associated data structures in NLTK.
+
+1. In NLTK, create and display graphically Xbar trees in the style of Lecture 1
+and Lecture Note 1 for the following three sentences.  Define the trees ta, tb,
+and t3 and display them inline in your notebook.  In case of ambiguity, choose
+the semantically plausible tree shape.
+
+a. the title on every book under the table will have faded
+b. she wondered whether he knew that they believed they admired Keisha
+c. every eligeble candidate told a presiding supervisor about it 
+
+
+2. Grammar of transitive verbs and relative clauses.
+
+The following are transitive sentences.
+
+the electrician repaired the router
+the plumber damaged the sink
+the plumber admired the electrician
+
+In the following, what are called subject relative clauses have been added to one of the NPs.
+This means that the relative pronoun "who" or "that" fills the subject position of
+the embedded verb.
+
+the electrician who admired the plumber repaired the router
+the plumber admired the electrician who damaged the sink
+the plumber repaired the sink that admired the router
+
+In the following, what are called object relative clauses have been added to one of the NPs.
+This means that the relative pronoun fills the object position of the embedded transitive verb.
+
+the plumber who the electrician admires damaged the sink
+the plumber damaged the sink that the electrician repaired.
+
+More relative clauses can be added.  In the second example, there are two relative
+on the noun "electrician".
+
+the plumber who the electrician admires damaged the sink that the plumber repaired
+
+the plumber admires the electrician who repaired the sink who the plumber admires
+
+a. In NLTK, write a CFG in ***Chomsky normal form*** for sentences with this pattern. The terminal words should be the ones
+that are seen above. Name the grammar g2.
+
+Start with the following grammar, and add productions. In the symbols, the character 'a' indicates animate,
+and the character 'i' indicates inanimate.
+
+S -> NPa VP
+S -> NPi VP
+V -> 'admired' | 'envied'
+V -> 'damaged' | 'repaired'
+Na -> 'plumber' | 'electrician' 
+Ni -> 'router' | 'sink' 
+THE -> 'the'
+NPa -> THE Na
+NPi -> THE Ni
+VP -> V NPa
+VP -> V NPi
+WHO -> 'who'
+THAT -> 'that'
+
+
+The grammar should impose the constraint that "electrician" and "plumber" go with the relative pronoun "who" and
+not the relative pronoun "that", while "sink" and "router" go with the relative pronoun "that" and not the
+relative pronoun "who". Use the distinction between 'a' and 'i' to impose this.
+As came up in class, this contraint is arguably not really valid, but assume it.
+
+*[NP the sink who the electrician damaged]
+*[NP the electrician that damaged the sink]
+
+Assume that semantically odd sentences like the following are ok.
+
+the sink admires the router
+the router repaired the plumber
+the plumber repaired the electrician
+
+3. Consider this sentence. Don't worry about the semantic implausibility.
+
+the the router that repaired the sink that the plumber admired damaged the router that the plumber repaired
+
+Using your grammar g2, define the following in Python.
+
+ a list of strings sb that corresponds to the sentence above
+
+ a parser p2 based on grammar g2
+
+ a generator gb optained with p2 operating on sb
+
+ a list of trees lb corresponding to gb (if you exhaust the generator gb in defining lb, redefine gb).
+  The elements should be NLTK trees.
+
+ the number nb of trees in lb
+
+4.  sent9.txt (supplied) is our list of sentences of lenght 9 that are in the
+relative clause pattern.
+
+Verify that your grammar g2 finds a tree for each of the sentences
+
+5. Call a grammar symbol x nullable in grammar g if there some tree licensed by
+g that has the terminal string [] (the empty list) and has the root label x.
+
+a. In Stabler's grammar g1 (see g1.py, supplied), the symbol 'C' is nullable.
+Show the tree that verifies nullability.
+
+b. What are the nullable symbols in grammar gn (supplied)?
+Show the trees that verify nullability.
+
+c. Describe in words a definition of 'nullable in g' along these lines:
+
+    symbol x is nullable in g iff there is a production x -> rhs in g such that ...
+
+d. Define in python a function 'nullable' which when appled to a grammar in NLTK
+format returns the set of nullable symbols.
+
+Hint: start with the assumption that no symbols are nullable, then iteratively
+search for nullable symbols by looking at the productions. A skeleton that does
+something silly is supplied.
+
+e. Test your function on some sample grammars including gn.
+
+
+
+
+
+
+
+
+
