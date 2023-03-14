@@ -1,0 +1,76 @@
+Computational Linguistics
+Spring 2023
+Howework 3a: Fst in Python
+
+The purpose of this assignment is set up for working with finite state transducers
+in Python, and to create a version of a phonetic dictionary of English.
+Submit your work in a notebook. 
+
+Define the following sets as finite state transducers in Python.
+
+1. The set P1 of strings of a's and b's that include at least one a and at least one b.
+
+2. The set P2 of strings of a's and b's that have a length divisible by three. Include the
+empty string.
+
+3. The relation R3 that has a string of a's and b's on the upper side, and on the lower
+side has a string of the same length, with b substituted for a, and a substituted for
+b.
+
+Hint: see page 135 of Beesley and Karttunen.
+
+Work individually, except you can get technical help on installation on the
+forum, and can ask for help on syntax and semantics on the forum.
+
+4. You are provided with a file model.corpus which encodes a phonetic dictionary
+for English.  It is not in the right format to be read directly into our FST
+environment.
+
+Explain in a paragraph the conventions which are used in these lines
+of model.corpus.  Do not answer telegraphically. What orthographic
+forms are encoded?  What phonetic forms are encoded?  How are
+multi-character symbols and empty strings used? 
+
+b}B a}AE1 n}NG k}K s|h}SH a}EH2 r}R e}_ s}Z
+
+s}S k}K i|r}ER1 m}M i}IH0 s|h}SH i}IH0 n|g}NG
+
+l}L a}EY1 t}T e}_
+
+Assume 's|h', AE1, and NG are multi-character symbols, and similarly for other cases.
+
+5. In Python, use Fst operations to create a relation R4 that represents the three words above.
+The upper side should represent spelling forms, but using multi-character symbols such as
+'s|h' where model.corpus uses them.  The lower side should have phonetic forms.
+
+Maintain the alignment between spelling forms and phonetic forms that is seen in model.corpus.
+Draw the machine and comment on how one sees that alignment is maintained. Verify that
+multi-character symbols are used as desired and comment on it.
+
+Work individually on problems 4 and 5.  Discuss methodology on the forum in the usual way.
+
+6. In Python, create a finite state transducer ENGLISH that is based on model.fst.
+It should have the same structure as the solution to 5.  It should have approximately
+135000 paths.
+
+Suggested strategy: Use a python program to transform model.corpus into a file that
+is appropriate for reading into the Python environment. Figure out how to read a
+transducer from a file.
+
+Submit tests showing that ENGLISH maps between spelling and phonetic forms in the
+desired way. Testing should be about 1/3 of the effort.
+
+Work in groups of up to three on problem 6. Each member should submit
+the solution. Bring up and correct any apparent errors in the file
+model.corpus.  Discuss methodology and conventions on the forum.
+
+
+
+
+
+
+
+
+
+
+

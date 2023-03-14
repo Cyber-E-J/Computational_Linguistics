@@ -1,0 +1,59 @@
+Computational Linguistics
+Spring 2023
+Howework 3a: Fst in Python
+
+The purpose of this assignment is set up for working with finite state transducers
+in Python, and to create a version of a phonetic dictionary of English.
+Submit your work in a notebook.  See the forum for setup methodology. 
+
+Define the following sets as finite state transducers in Python.
+
+1. The set P1 of strings of a's and b's that include at least one a and at least one b.
+
+2. The set P2 of strings of a's and b's that have a length divisible by three. Include the
+empty string.
+
+3. The relation R3 that has a string of a's and b's on the upper side, and on the lower
+side has a string of the same length, with b substituted for a, and a substituted for
+b.
+
+Hint: see page 135 of Beesley and Karttunen.
+
+You are provided with a machine English that maps orthographic words to phonetic forms.
+(You are also provided with the file model.corpus that is indirectly a source for it.)
+
+Look at english.ipynb for the methodology for solving these problems.
+In each problem, define a machine Pi that solves the problem.  Illustrate by
+sampling.
+
+4. Define a machine P4 for the orthographic forms of words that on the phonetic side
+begin with K and end with K.
+
+Illustrate by sampling.
+
+5. Define a machine P5 for the orthographic forms of words that on the phonetic side
+consist purely of vowels and nasals.
+
+Use definitions from phoneclass.fst.  You probably won't be able to import this directly, restate the definitions.
+
+Illustrate by sampling.
+
+6. Define a machine P6 for the phonetic forms of two-syllable words that have the main stress
+coming first.  Use definitions from phoneclass.fst for the stress classes.
+
+Illustrate by sampling.
+
+Work individually, except you can get technical help on installation on the
+forum, and can ask for help on syntax and semantics on the forum.
+
+In problems 4-6, the answers are sets.  Pay attention to whether they are sets of
+orthographic words (upper side of English) or phonetic forms (lower side of English).
+
+
+
+
+
+
+
+
+
