@@ -1,0 +1,150 @@
+Computational Linguistcs
+Spring 2023
+Howework 3b: Finite state lexicons
+
+The purpose of this assignment is to write small finite state
+morphologies and phonologies.  Work in Python, using the
+definition methodology.  See the notebook for Russian for the
+pattern of solution.
+
+Problems 1 and 2 list forms from the languages Lamba and Tagalog.  In
+each problem, construct in a finite state lexicon that has the
+following form.  Use these exact names for the transducers you define.
+Submit a notebook and a pdf of a run of the notebook.
+
+(i) Morpheme relation
+
+A relation LambaM or TagalogM that has a multi-character symbol
+corresponding to an English gloss on the upper side, and an underlying
+spelling for the language on the lower side.  For instance suppose
+that in your analysis the underlying spelling of WATER is {aa}.  Then
+you should see behavior like this in foma.
+
+set print-space ON;
+regex [WATER .o. LambaM].l
+print words
+a a
+
+The symbol WATER has been mapped the to the underlying spelling {aa}.
+
+(ii) A set LambaPHRASE or TagalogPHRASE of underling morpheme
+sequences for the examples in the table.  Each element is a sequence
+abstract morphemes.  You need to figure out the optimal order, and
+define the phrases using a Foma definition or sequence of definitions.
+For instance if '1STGEN' and 'PAN' are morphemes, the underlying form
+of 'capay' in could be '1STGEN PAN' or 'PAN 1STGEN', and this should
+be an element of LambaPHRASE. (1STGEN is supposed to suggest first
+person genitive.)
+
+(ii) A relation LambaMOR or TagalogMOR defined in terms of LambaM or
+TagalogM and LambaPHRASE or TagalogPHRASE that maps phrases to
+underling spellings.
+
+(iii) A relation LambaPHON or TagalogPHON that maps phrases in
+undelying spelling to surface forms.
+
+Your system should be designed so that [LambaPHRASE .o. LambaMOR
+.o. LambaPHON] is a finite state lexicon that has on its lower side
+the forms given in the tables, and has morpheme sequences on the upper
+side.  Similarly for Tagalog.
+
+The phonology should be defined as a composition of rewrite rules.
+Define each rule separately, then compose them.  See the
+Russian example.  You may need to use the notation using commas for
+rules with multiple changes or multiple contexts which is defined on
+page 135 of Beesley + Karttunen.
+
+Do not include the '+' symbol on the underlying side that is used in
+the Russian analysis in russian1.fst
+
+1. Lamba
+
+water    sloth         pan      skin     gloss
+-----------------------------------------------
+haa      pahiitu       pay      hay      noun
+haahu    pahiituhu     pahyu    hahyu    to the noun
+cahaa    capahiitu     capay    cahay    his noun
+rahyaa   raplyahiitu   rape     rahe     my noun
+cahaahu  capahiituhu   capahyu  cahahyu  to his noun
+rahyaahu rapyahiituhu  rapehyu  rahehyu  to my noun
+
+fit       give      fry         gloss
+cacaa     cacaay    caruye      he verbs
+cacaara   cacaarya  caruyerya   he verbs it
+racyaa    racee     raryuye     I verb
+racyaara  raceerya  raryuyerya  I verb it
+
+Use English words for the morpheme symbols. If feasible, use a subset
+of the set {WATER, SLOTH, PAN, SKIN, FIT, GIVE, FRY, TO, THE, MY, HIS,
+I, HE, IT}, so that LambaM.u is a subset of this set.  Don't use more
+morpemes than necessary, and don't assume that the elements of PHRASE
+look just like the glosses, or have the same morpheme order as the
+glosses.
+
+Sanity checks: 
+
+LambaPHRASE should have 24 paths, because that it the number of
+surface forms in the table, and each surface form should have
+a representation as a morpheme sequence.
+
+The lower side of [LambaPHRASE .o. LambaMOR .o. LambaPHON] should have 24 paths,
+because that is the number of surface forms in the table.
+
+LambaPHRASE & [????] should be empty, because judging by the glosses,
+no phrase has four morphemes.
+
+
+2. Tagalog
+ROOT    IN      AN      GLOSS FOR ROOT
+bukas	buksin	buksan	open
+kapit	kaptin	kaptan	embrace
+tubos	tubsin	tubsan	redeem
+opos	upsin	upsan	stop
+posod	pusdin	pusdan	tuft
+bata	bathin	bathan	suffer
+bili	bilhin	bilhan	buy
+dipa	diphin	diphan	open
+polo	pulhin	pulhan	ask for trifles
+puyo	puyhin		saddlebag
+banig	baŋgin	baŋgan	mat
+damit	damtin	damtan	clothe
+ganap	gampin	gampan	fulfill
+putol	putlin	putlan	cut
+atip	aptin	aptan	thatching
+talab		tablan	penetrate
+tanim	tamnin	tamnan	plant
+laman	lamnin	lamnan	fill
+
+The first column contains surface simple forms (roots), which are
+mostly verbs put apparently include a couple of nouns.  Don't assume
+that the base form of the roots is necessarily the same as the surface
+form.  Assume the second column is formed by adding a suffix which on
+the surface ends with -in.  Use the multi-character symbol 'IN' for
+the morpheme.  Assume the third column is formed by adding a suffix
+which on the surface ends with -an.  Use the multi-character symbol
+'AN' for the morpheme. Figure out whether the underlying spelling of
+the suffix 'in' should be {in} or something different.  For the roots,
+use the English words for the morphemes.  For instance if the
+underling spelling of 'OPEN' is the same as the surface form {bukas},
+you should see this behavior in foma.
+
+set print-space ON
+regex [OPEN .o. M].l;
+print words
+b u k a s
+(five characters/symbols)
+
+regex [M .o. {bukas}].u;
+print words
+OPEN
+(one symbol)
+
+Two forms are not in the table; your solution could fill these in.
+
+It is desirable to minimize the number of phonological rules, but
+solutions with an extra rule or two will not be penalized much. Also,
+there are different good solutions.  Make sure you have the right
+input-output behavior.  Structure your solution using definitions,
+rather than using large single regular expressions.  In
+your writeup, discuss any problems or ugly fixes that you had to
+include.
