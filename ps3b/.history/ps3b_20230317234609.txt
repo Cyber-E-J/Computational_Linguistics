@@ -105,13 +105,13 @@ bata	bathin	bathan	suffer
 bili	bilhin	bilhan	buy
 dipa	diphin	diphan	open
 polo	pulhin	pulhan	ask for trifles
-puyo	puyhin		    saddlebag
+puyo	puyhin		saddlebag
 banig	baŋgin	baŋgan	mat
 damit	damtin	damtan	clothe
 ganap	gampin	gampan	fulfill
 putol	putlin	putlan	cut
 atip	aptin	aptan	thatching
-talab           tablan	penetrate
+talab		tablan	penetrate
 tanim	tamnin	tamnan	plant
 laman	lamnin	lamnan	fill
 

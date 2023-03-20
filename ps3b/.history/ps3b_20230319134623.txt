@@ -111,7 +111,7 @@ damit	damtin	damtan	clothe
 ganap	gampin	gampan	fulfill
 putol	putlin	putlan	cut
 atip	aptin	aptan	thatching
-talab           tablan	penetrate
+talab		tablan	penetrate
 tanim	tamnin	tamnan	plant
 laman	lamnin	lamnan	fill
 
