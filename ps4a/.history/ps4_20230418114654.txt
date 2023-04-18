@@ -1,0 +1,126 @@
+Computational Linguistics
+Spring 2023
+
+Problem Set 4
+
+The purpose of this homework ies to write feature grammars of
+sentences about strings, to excercise the setup aspects of work
+with Kaldi, and to start to prepare materials for the end-to-end
+system.
+
+In problems 1-4, work in teams of two. In problems 5-6, work in teams
+of three and solve one of the two problems.
+
+1. Number feature. The following sentences illustrate number agreement
+between subjects, verb phrases, and within DPs.
+
+No vowels are capitalized.
+* No vowels is capitalized.
+
+No vowel is capitalized.
+* No vowel are capitalized.
+
+Exactly two vowels are capitalized.
+*Exactly two vowels is capitalized.
+
+*Exactly two vowel
+Exactly two vowels
+
+Exactly one vowel
+*Exactly one vowels
+
+Create a feature grammar including semantics that has singular and plural
+determiners, singular and plural DPs, and singular and plural VPs, and
+enforces agreement correctly.
+
+2. There insertion
+
+There are at least two vowels.
+There are exactly two vowels.
+There are no vowels vowels.
+There are some vowels vowels.
+
+* There is every vowel.
+* There are most vowels.
+
+There is exactly one consonant.
+There is no consonant.
+
+Notice these points.
+
+(i) The set of determiners that can occur in there-insertion is
+restricted.  These are called weak determiners. Use a feature
+to distinguish weak determiners from strong ones.
+
+(ii) The verb is/are agrees in number with the phrase that follows.
+
+Write a grammar (based on the one from Problem 1) that enforces the
+restrictions.
+
+3. Make a selection of ten sentences about strings. One method is to modify
+sentences from challenge problems for ps2.
+
+Pick a nickname for yourself, say 'ayako'.  Record the sentences as wav files
+ayako-a-1.wav ... ayako-a-10.wav.   
+
+Check on the forum for specifications regarding sample rate and the like.
+Install the sentences on kuno in a location that will be specied on
+the forum.
+
+4. Kaldi setup
+Set up jupyter and bash kernel on kuno. In a jupyter bash notebook, do
+these things.
+
+a. Run the demo run.sh in egs/yesno in the notebook, using your own
+copy of egs/yesno.
+
+b. Using kaldi tools, print a matrix with the first ten rows and first five columns of
+one of the utterances.  Methodology will be covered in class.
+The relevant programs are in featbin.
+
+Get started on this problem soon enough that you can work out setup
+issues by the due date.
+
+5. Programming (one of two options)
+
+a. Write a program which given a grammar and a number n returns an
+iterator over word strings that are licensed by the grammar and have
+length exactly n. 
+
+b. Add functionality for including a words string with a given
+probability p. For instance if p is 0.01, sentences are included with
+1% probability.
+
+c. Add functionality for computing a frequency distribution on pairs
+of adjacent words pairs in sentences of length n. Come to an agreement
+on the forum about what this function should return.
+
+Illustrate your solution with a grammar that has sentences of unbounded length.
+
+Hint: This might be a starting point for part a.
+
+  from nltk.parse.generate import generate
+
+Post questions of clarification on the forum.
+
+6. Grammar development (one of two options)
+
+Write a synthesized feature grammar including semantics for sentences about strings that covers data seen
+so far, including the challenge problems. Challenge problems that were not solved, or where you think the
+solution is incorrect, can be left out. Include adjectives, relative clauses, and there insertion.
+
+Include a writeup or notebook that explains and illustrates your solution, showing trees.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
